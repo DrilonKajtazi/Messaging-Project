@@ -1,3 +1,35 @@
 spring:
   application:
     name: Gateway
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth
+              uri: http://localhost:8081
+              predicates:
+                - Path=/auth/**
+              filters:
+                - RemoveRequestHeader=Origin
+                - PreserveHostHeader
+
+            - id: messaging-api
+              uri: http://localhost:8082
+              predicates:
+                - Path=/messaging-api/**
+              filters:
+                - RemoveRequestHeader=Origin
+                - PreserveHostHeader
+
+            - id: messaging-core
+              uri: http://localhost:8083
+              predicates:
+                - Path=/messaging-core/**
+              filters:
+                - RemoveRequestHeader=Origin
+                - PreserveHostHeader
+
+
+server:
+  port: 8080

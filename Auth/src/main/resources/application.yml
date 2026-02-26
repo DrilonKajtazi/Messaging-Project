@@ -1,3 +1,24 @@
 spring:
   application:
     name: Auth
+  datasource:
+    url: jdbc:postgresql://localhost:5432/auth
+    username: postgres
+    password: postgres
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+server:
+  servlet:
+    context-path: /auth
+  port: 8081
+auth:
+  jwt:
+    secret: de8c58ce03aad1512ca0ac1b0cd291a62642f6e34302d50184f54263aa8eef99
+    expiration: 3600000 #IN MILLISECONDS
+cookie:
+  name: drilons-messaging-project
+  domain: localhost
+  secure: true
